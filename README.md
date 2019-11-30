@@ -33,3 +33,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 로그인
 
 ## 한줄 메모장
+- 메모 글 쓰기
+- 메모 글 목록
+- 메모 글 보기
+- 메모 글 편집
