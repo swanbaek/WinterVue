@@ -22,3 +22,14 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+#Vue를 이용한 회원가입,로그인, 메모장
+## 컴포넌트 제작하여 홈페이지 구성
+
+## Vue-Router 이용하기
+
+## 회원가입 
+
+## 로그인
+
+## 한줄 메모장
