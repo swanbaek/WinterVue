@@ -1,7 +1,7 @@
 # Logs
 logs
 *.log
-<<<<<<< HEAD
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -68,8 +68,7 @@ node_modules
 .env.*.local
 
 # Log files
-=======
->>>>>>> version1
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
