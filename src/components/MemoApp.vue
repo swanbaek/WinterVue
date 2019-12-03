@@ -8,7 +8,8 @@
   <div class="row m-5">
     <intro-content  v-on:changeMode="setMode"/>
     <create-content  v-on:changeMode="setMode" v-on:addMemo="save"/>
-    <list-content  v-bind:memoList="memoArr" v-on:changeMode="setMode"/>
+    <list-content  v-bind:memoList="memoArr" v-on:changeMode="setMode"  v-on:showEdit="edit"/>
+    <view-content v-bind:editMemo="memo" v-on:editEnd="editEndOk"></view-content>
   </div>
   </div>
 </template>
@@ -19,6 +20,7 @@
 import IntroContent from './memo/IntroContent.vue';
 import CreateContent from './memo/CreateContent.vue';
 import ListContent from './memo/ListContent.vue';
+import ViewContent from './memo/ViewContent.vue';
   export default {
     // 이곳에는 Vue의 속성이나 메소드들이 들어감
     data:function(){
@@ -38,7 +40,8 @@ import ListContent from './memo/ListContent.vue';
       // 'app-header':AppHeader,
       'intro-content':IntroContent,
       'create-content':CreateContent,
-      'list-content':ListContent
+      'list-content':ListContent,
+      'view-content':ViewContent
     },
     methods:{
       renewTitle:function(){
@@ -53,6 +56,21 @@ import ListContent from './memo/ListContent.vue';
         //alert(JSON.stringify(mymemo));
         this.memoArr.push(mymemo);
         localStorage.setItem('memos', JSON.stringify(this.memoArr));
+      },
+       edit:function(val){
+       this.memo={...val};
+      },
+      editEndOk:function(val){
+        var arr=[...this.memoArr];
+        for(let i=0;i<arr.length;i++){
+          //alert(val.no);
+          if(arr[i].no==val.no){
+            arr[i]=val;
+            break;
+          }
+        }
+        this.memoArr=arr;
+        localStorage.setItem("memos",JSON.stringify(this.memoArr));
       }      
     },
     created(){

@@ -9,7 +9,7 @@
             </li>
                 
             <li  v-for="(memo,i) in memoList" v-bind:key="i"  class="list-group-item d-flex justify-content-between align-items-center">                   
-                <a href="#" >{{memo.title}}</a>
+                <a href="#"  v-on:click.prevent="goEdit(memo)" >{{memo.title}}</a>
                 <span class="badge badge-danger badge-pill">{{memo.wdate}}</span>
             </li> 
             
@@ -27,6 +27,10 @@
         methods:{
             go:function(val){
                 this.$emit('changeMode',val);
+            },
+             goEdit:function(memo){
+                //alert(memo.no+"/"+memo.title+"/"+memo.wdate);
+                this.$emit('showEdit',memo);
             }
         },
        
