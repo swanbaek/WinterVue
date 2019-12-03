@@ -52,8 +52,11 @@ import ListContent from './memo/ListContent.vue';
         const mymemo={...val};
         //alert(JSON.stringify(mymemo));
         this.memoArr.push(mymemo);
-      }
-      
+        localStorage.setItem('memos', JSON.stringify(this.memoArr));
+      }      
+    },
+    created(){
+      this.memoArr=JSON.parse(localStorage.getItem('memos'));
     }
   }
 </script>
