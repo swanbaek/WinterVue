@@ -27,6 +27,7 @@
         data:function(){
             return {
                 memo:{
+                    no:0,
                     title:'',
                     msg:'',
                     wdate:''
@@ -40,9 +41,13 @@
             create:function(e){
                 e.preventDefault();
                 let d=new Date();
+                var memoArr=localStorage.getItem('memos');
+                this.memo.no=(memoArr==null)?1:JSON.parse(memoArr).length+1;
                 this.memo.wdate=d.getFullYear()+"-"+(d.getMonth()+1)+'-'+d.getDate();
+
                 this.$emit('addMemo',this.memo);
-                this.memo={title:'',msg:'',wdate:''};
+
+                this.memo={no:0,title:'',msg:'',wdate:''};
             }
         }
     }

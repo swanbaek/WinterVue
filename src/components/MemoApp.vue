@@ -74,7 +74,7 @@ import ViewContent from './memo/ViewContent.vue';
       }      
     },
     created(){
-      this.memoArr=JSON.parse(localStorage.getItem('memos'));
+      this.memoArr=(localStorage.getItem('memos')==null)?[]:JSON.parse(localStorage.getItem('memos'));
     }
   }
 </script>
