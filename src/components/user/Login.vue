@@ -38,7 +38,12 @@
             loginCheck:function(){
               //  alert('login');
               var user=JSON.parse(localStorage.getItem('vue-user'));
-              alert((user))
+              if(user==null){
+                  alert('회원가입을 먼저 하세요');
+                  this.$router.push('/signup');  
+                  return;
+              }
+              //alert((user))
               if(user.name!==this.loginUser.nick){
                   this.msg="닉네임이 틀려요!"
                   return;

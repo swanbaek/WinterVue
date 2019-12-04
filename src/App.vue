@@ -22,8 +22,8 @@ export default {
   },
   methods:{
     loginStatus:function(val){
-      //alert(val)
-      this.status=val+"님 로그인 중...";
+      
+      this.status=(val!=null)? val+"님 로그인 중...":"";
     }
   }
 }
