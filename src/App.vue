@@ -24,6 +24,11 @@ export default {
     loginStatus:function(val){
       
       this.status=(val!=null)? val+"님 로그인 중...":"";
+      if(val!=null){
+        sessionStorage.setItem('isLogin',true);
+      }else{
+        sessionStorage.setItem('isLogin',false);
+      }
     }
   }
 }

@@ -33,6 +33,12 @@
 		
 		methods:{
 			editProcess:function(e){
+				var isLogin=sessionStorage.getItem("isLogin");
+				if(isLogin==='false'){
+					alert('로그인을 해야 수정 가능합니다.');
+					this.$router.push('/login');
+					return;
+				}
 				var tmpMemo={
 					no:e.target.no.value,
 					title:e.target.title.value,
