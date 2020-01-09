@@ -6,6 +6,9 @@ import MemoApp from '../components/MemoApp.vue'
 import SignUp from '../components/user/SignUp.vue'
 import Login from '../components/user/Login.vue'
 import LogOut from '../components/user/LogOut.vue'
+
+import Board from '../components/board/Board.vue'
+import Card from '../components/board/Card.vue'
 Vue.use(VueRouter);
 
 export default new VueRouter({
@@ -38,9 +41,18 @@ export default new VueRouter({
             component:LogOut
         },
         {
+            path:'/board/:bno',
+            name:'Board',
+            component:Board,
+            children:[
+                {path:'card/:cno', component:Card}
+            ]
+        },
+        {
             path:'/*',
             name:'NotFound',
             component:NotFound
         }
+
     ]
 })

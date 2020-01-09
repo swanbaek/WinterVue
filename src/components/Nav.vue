@@ -23,6 +23,12 @@
       </li>    
       <li class="nav-item">
         <router-link to="/memo" class="nav-link">Memo</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/board/1" class="nav-link">Board1</router-link>
+      </li> 
+      <li class="nav-item">
+        <router-link to="/board/2" class="nav-link">Board2</router-link>
       </li>    
     </ul>
   </div>  
