@@ -9,6 +9,7 @@ import LogOut from '../components/user/LogOut.vue'
 
 import Board from '../components/board/Board.vue'
 import Card from '../components/board/Card.vue'
+import BoardClassic from '../components/board/BoardClassic.vue'
 Vue.use(VueRouter);
 
 export default new VueRouter({
@@ -47,6 +48,11 @@ export default new VueRouter({
             children:[
                 {path:'card/:cno', component:Card}
             ]
+        },
+        {
+            path:'/boardclassic',
+            name:'BoardClassic',
+            component:BoardClassic            
         },
         {
             path:'/*',

@@ -33,6 +33,9 @@
         created(){
            // this.cno=this.$route.params.cno;
           // this.getCardData();
+          
+          //Vue-router를 사용하면, $route 객체를 통해 
+          //브라우저에서 현재 url에 대한 정보를 가져올 수 있다
         },
         methods:{
             getCardData(){
