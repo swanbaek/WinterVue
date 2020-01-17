@@ -1,10 +1,12 @@
 <template>
     <div class="container">
           <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-8 p-4 text-info" v-if="loading">Loading Board...</div>
-        <div v-else  class="col-md-8 p-4" style="height:600px;overflow-y:auto">
+
+        <board-form></board-form>
+
+        <div class="row">        
+        <div class="col-md-12 p-4 text-info" v-if="loading">Loading Board...</div>        
+        <div v-else  class="col-md-12 p-4" style="height:600px;overflow-y:auto">
         
             <ul class="media-list p-3" style="border:1px solid silver">
               <li class="media m-2 p-2" :key="board.idx" v-for="(board) in boards" style="border-bottom:1px solid silver;background:#e9ecef">
@@ -31,6 +33,7 @@
 </template>
 
 <script>
+import BoardWrite from './BoardWrite.vue'
     export default {
         data(){
             return{
@@ -41,6 +44,9 @@
                 isTwo:true
                 
             }
+        },
+        components:{
+            'board-form':BoardWrite
         },
         watch:{
             '$route'(){

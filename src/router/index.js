@@ -10,6 +10,7 @@ import LogOut from '../components/user/LogOut.vue'
 import Board from '../components/board/Board.vue'
 import Card from '../components/board/Card.vue'
 import BoardClassic from '../components/board/BoardClassic.vue'
+import LoginClassic from '../components/user/LoginClassic.vue'
 Vue.use(VueRouter);
 
 export default new VueRouter({
@@ -35,6 +36,11 @@ export default new VueRouter({
             path:'/login',
             name:'Login',
             component:Login
+        },
+        {
+            path:'/login_inc',
+            name:'LoginClassic',
+            component:LoginClassic
         },
         {
             path:'/logout',

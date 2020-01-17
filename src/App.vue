@@ -1,14 +1,21 @@
 <template>
   <div id="app" class="container">
     <header-comp></header-comp>
+    
     <nav-comp v-bind:userstatus="status"></nav-comp>
+    <div class="row">
+    <left-comp></left-comp>
+    <div class="col-md-9">
     <router-view  v-on:login-result="loginStatus"> </router-view>
+    </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
 import Nav from './components/Nav.vue'
+import LoginClassic from './components/user/LoginClassic.vue'
 export default {
   name: 'app',
   data(){
@@ -18,7 +25,8 @@ export default {
   },
   components: {
     'header-comp':Header,
-    'nav-comp':Nav
+    'nav-comp':Nav,
+    'left-comp':LoginClassic
   },
   methods:{
     loginStatus:function(val){
