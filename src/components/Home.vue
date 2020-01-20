@@ -6,8 +6,13 @@
 
 <script>
     export default {
-        name:'Home'
+        name:'Home',        
+        methods:{
+            
+        }
+
     }
+    
 </script>
 
 <style lang="scss" scoped>

@@ -66,7 +66,9 @@ import BoardWrite from './BoardWrite.vue'
             getBoardData(){
                 this.loading=true;
                 var req=new XMLHttpRequest();
-                req.open("GET","board.json");
+                const url="http://localhost:9090/MvcShop/index.do";
+                //req.open("GET","board.json");
+                req.open("GET", url);
                 req.onload=()=>{
                     var res=req.responseText;
                     this.boards=JSON.parse(res);
