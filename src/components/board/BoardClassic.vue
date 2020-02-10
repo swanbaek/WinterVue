@@ -2,7 +2,7 @@
     <div class="container">
           <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-        <board-form v-on:write-ok="getBoardData"></board-form>
+        <board-form v-on:write-ok="getBoardData" v-bind:member="member"></board-form>
 
         <div class="row">        
         <div class="col-md-12 p-4 text-info" v-if="loading">Loading Board...</div>        
@@ -47,6 +47,7 @@ import BoardWrite from './BoardWrite.vue'
                 
             }
         },
+         props:['member'],       
         components:{
             'board-form':BoardWrite
         },
@@ -57,6 +58,7 @@ import BoardWrite from './BoardWrite.vue'
             }
         },
         created(){
+            //alert(this.member.nick);
             
             // this.bno=this.$route.params.bno;
             // if(!this.bno){
