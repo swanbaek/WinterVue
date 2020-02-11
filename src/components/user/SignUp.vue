@@ -52,11 +52,13 @@
 </template>
 
 <script>
+import axios from 'axios';
     export default {
          data() {
              return{
                 user:{
                     name:'',
+                    id:'test',
                     pwd:'',
                     email:''
                 },
@@ -92,13 +94,32 @@
                 submit:function(){
                    // alert(this.user.name+"님 회원가입 처리 합니다.")
                    if(!this.nameErr && !this.pwdErr && !this.pwdErr2){
-                       localStorage.setItem('vue-user',JSON.stringify(this.user));
-                     alert('회원 가입 요청 중...');
+                      // localStorage.setItem('vue-user',JSON.stringify(this.user));
+                     //alert('회원 가입 요청 중...');
+                     this.requestJoin();
                      this.$router.push('/login')
                 }else{
                     alert('입력값에 오류가 있습니다.');
                 }
-            }
+                }//submit()-------
+                ,requestJoin(){
+                    let url="http://localhost:9090/VueBackend/join.jsp"
+                    let params=new URLSearchParams();    
+                    alert(this.user.name);                
+                    params.append('name',this.user.name);
+                    params.append('id',this.user.id);
+                    params.append('pwd',this.user.pwd);
+                    params.append('email',this.user.email);
+
+                    axios.post(url, params)
+                        .then(function(response){
+                            alert(response);
+                        })
+                        .catch(function(err){
+
+                            alert(err.message);
+                        })
+                }
             }//methods
     }
 </script>
