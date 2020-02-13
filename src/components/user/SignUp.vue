@@ -25,11 +25,12 @@
         </div> 
         <div class="row">    
             <div class="col-md-6 offset-md-3">   
-            User ID: <input type="text" name="userId"
+            User ID: <input type="text" name="userId" ref="userId"
              placeholder="User ID" class="form-control" 
              v-model="user.id"
-             v-on:keyup="checkNick">    
+             v-on:keyup="checkNick" v-on:change="checkDuplId">    
             <div v-if="nickErr" class="text-danger">닉네임은 4자이상 6자 이하 입니다.</div>
+            <div v-if="idCheckMsg" class="text-primary">{{idCheckMsg}} </div>
             </div>
         </div>
         <div class="row"> 
@@ -59,12 +60,7 @@
                 </div>
         </div>
 
-        <div class="row m-5">
-            <div class="col-md-6 offset-md-3">
-
-            </div>
-			
-        </div>
+       
         </form>
             </template> 
             <!-- isProcess==false -->
@@ -83,22 +79,43 @@ import axios from 'axios';
                     pwd:'',
                     email:''
                 },
-                nickErr:false,
-                pwdErr:false,
-                pwdErr2:false,
-                isProcess:false,
-                isSignupFail:false
+                nickErr:false, /*아이디 유효성 체크 4자 이상 6자 이내 */
+                idCheckMsg:'', /*아이디 중복여부 체크 결과 메시지 '아이디 사용가능' 또는 '아이디 사용 불가'*/
+                isIdCheck:false, /*아이디 중복여부를 체크했는지 여부 */
+                pwdErr:false, /*비번 유효성 체크 4자 이상  자 이내 */
+                pwdErr2:false, /*비번 재확인 */
+                isProcess:false, /*회원가입 처리 진행중일 때 true, 아니면 false */
+                isSignupFail:false /*회원가입 처리 실패시 true */
             }
          },
             methods:{
-                checkNick:function(e){
-                    let nick=(e.target.value);
+                checkNick:function(){
+                    //let nick=(e.target.value);
+                    this.isIdCheck=false;
+                    this.idCheckMsg='';
+                    let nick=this.user.id;
                     let len=nick.length;
                     if(len<4||len>6){
                         this.nickErr=true;
                     }else{
                         this.nickErr=false;
                     }
+                },
+                checkDuplId:function(){
+                    let uid=this.user.id;
+                    let url="http://localhost:9090/VueBackend/idCheck.jsp?userid="+uid;
+                    axios.get(url).then((response)=>{
+                        let n=parseInt(response.data.result);
+                        if(n>0){
+                            this.idCheckMsg=this.user.id+"는 사용가능한 아이디입니다";
+                            this.isIdCheck=true;
+                        }else{
+                            this.idCheckMsg=this.user.id+"는 이미 사용 중 입니다."
+                            this.isIdCheck=false;
+                        }
+                    }).catch((err)=>{
+                        alert(err.message)
+                    })
                 },
                 checkPwd:function(){
                     //let pw1=e.target.value;
@@ -116,6 +133,11 @@ import axios from 'axios';
                 },
                 submit:function(){
                    // alert(this.user.name+"님 회원가입 처리 합니다.")
+                   if(!this.isIdCheck){
+                       alert('아이디 중복 체크를 하세요');
+                       this.$refs.userId.select();
+                       return;
+                   }
                    if(!this.nameErr && !this.pwdErr && !this.pwdErr2){
                       // localStorage.setItem('vue-user',JSON.stringify(this.user));
                      //alert('회원 가입 요청 중...');

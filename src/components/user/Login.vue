@@ -2,17 +2,17 @@
     <div class="container p-5">
         <h1>Login</h1>
                 <div class="text-danger">{{msg}} </div>
-        <form name="loginF" action="login.jsp" v-on:submit.prevent="loginCheck">
+        <form name="loginF" action="login.jsp" v-on:submit.prevent="loginCheck2">
         <div class="row">    
             <div class="col-md-6 offset-md-3">
                 
-                Nick Name: <input type="text" name="userNick" v-model="loginUser.nick"
-                placeholder="Nick Name" class="form-control" >    
+                Nick Name: <input type="text" name="id" v-model="loginUser.id"
+                placeholder="User ID" class="form-control" >    
             </div>
         </div>
         <div class="row"> 
             <div class="col-md-6 offset-md-3">
-                PASSWORD: <input type="password" name="userPwd" v-model="loginUser.pwd"
+                PASSWORD: <input type="password" name="pwd" v-model="loginUser.pwd"
                 placeholder="Password" class="form-control">    
             </div>
         </div>
@@ -24,18 +24,45 @@
 </template>
 
 <script>
+import axios from 'axios';
     export default {
         data(){
             return {
                 loginUser:{
-                    nick:'',
+                    id:'',
                     pwd:''
                 },
-                msg:''
+                msg:'',
+                isLoginProcess:false,
+                isLoginFail:false,
             }
         },
         methods:{
-            loginCheck:function(){
+            loginCheck(){
+                if(!this.loginUser.id){
+                    alert('아이디를 입력하세요');
+                    return;
+                }
+                if(!this.loginUser.pwd){
+                    alert('비밀번호를 입력하세요');
+                    return;
+                }
+                this.requestLogin();
+            },
+            requestLogin(){
+                let url="http://localhost:9090/VueBackEnd/loginCheck.jsp";
+                let params=new URLSearchParams();
+                params.append('id',this.loginUser.id);
+                params.append('pwd',this.loginUser.pwd);
+                axios.post(url,params)
+                    .then((response)=>{
+                        alert(response.data)
+                    })
+                    .catch((err)=>{
+                        alert(err.message);
+                    })
+            },
+            loginCheck_old:function(){
               //  alert('login');
               var user=JSON.parse(localStorage.getItem('vue-user'));
               if(user==null){
