@@ -96,8 +96,9 @@
                             this.isLogin=false;
                             return;
                         }else{
-                            alert(typeof response.data.data)
+                           // alert(typeof response.data.data)
                             this.user=response.data.data;
+                
                             sessionStorage.setItem('uname',this.user.name);
                             sessionStorage.setItem('uid',this.user.id);
                             sessionStorage.setItem('uidx',this.user.idx);
@@ -112,9 +113,11 @@
                     
             },
             getUserData(){
-            let uid=sessionStorage.getItem('uid');
-            let uidx=sessionStorage.getItem('uidx');
-            let uname=sessionStorage.getItem('uname');
+                
+                
+             let uid=sessionStorage.getItem('uid');
+             let uidx=sessionStorage.getItem('uidx');
+             let uname=sessionStorage.getItem('uname');
             
             if(uid==undefined||uid===""){
                 this.isLogin=false;

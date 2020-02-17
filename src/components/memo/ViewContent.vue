@@ -1,5 +1,5 @@
 <template>
-<div class="col-md-3 col-sm-12 col-xs-12 p-3" >
+<div class="col-md-4 col-sm-12 col-xs-12 p-3" >
     <div class="card" >
         <img src="images/memo02.PNG"  class="card-img-top img img-thumbnail" style="height:350px" />
         <div class="card-img-overlay text-center">

@@ -1,7 +1,8 @@
 <template>
     <div class="container mt-5 mb-3">
         <div class="row">
-            <div class="col-md-12 p-4" style="border:1px solid seagreen">                
+            <div class="col-md-12 p-4" style="border:1px solid seagreen">    
+                <h1>POST</h1>            
                 <form id="bf" class="form" method="post" enctype="multipart/form-data" v-on:submit="handleSubmit">                    
                     <input type="text" name="subject" id="subject" v-model="board.subject"
                      class="form-control m-1" placeholder="Subject">
@@ -10,12 +11,17 @@
                     <input type="file" ref="file" name="filename" id="filename"
                     v-on:change="handleFileup()"
                      class="form-control m-1">
+                    
+                    <div class="col-md-6 offset-md-3 text-center" v-if="preview">
+                        <img v-bind:src="preview" class="img img-thumbnail"></div>
+
                     <button v-if="!loading" class="btn btn-outline-danger m-1">글쓰기</button>
                     <button v-else class="btn btn-danger m-1">Loading...</button>
                 </form>    
+                
             </div> 
-
         </div>
+        
 
     </div>
 </template>
@@ -26,12 +32,13 @@
         data(){
             return {
                 board:{
-                    idx:0,
+                    idx:1,
                     name:'',
                     subject:'',
                     content:'',
                     filename:'',                    
                 },
+                preview:'a', //업로드 이미지 미리보기시 사용
                 loading:false,
                 result:false,
                 boards:[]               
@@ -42,13 +49,23 @@
             handleFileup(){
                 this.board.filename=this.$refs.file.files[0];
                // alert(JSON.stringify(this.board.filename))
+               //이미지 미리보기-----------------
+                var file =this.board.filename; //e.target.files[0];
+               // alert(file)
+                if (file && file.type.match(/^image\/(png|jpeg)$/)) {
+                    this.preview = window.URL.createObjectURL(file)
+                    alert(this.preview)
+                }
             },
             handleSubmit(e){
                 e.preventDefault();
-                if(!this.member.nick){
-                    alert('로그인을 해야 이용 가능합니다.');
-                    return;
-                }
+                // if(!this.member.nick){
+                //     alert('로그인을 해야 이용 가능합니다.');
+                //     return;
+                // }
+                
+                //--------------------------
+
                 this.board.name=this.member.nick;
                 let fd = new FormData();
                 fd.append("name",this.board.name);

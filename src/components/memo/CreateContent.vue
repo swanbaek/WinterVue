@@ -1,5 +1,5 @@
 <template>
-       <div class="col-md-3 col-sm-12 col-xs-12 p-3">
+       <div class="col-md-4 col-sm-12 col-xs-12 p-3">
             <div class="card" style="height: 350px">
                 <div class="card-header text-center">
                 <h3 class="text-center text-success">Add Memo</h3>

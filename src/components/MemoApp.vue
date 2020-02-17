@@ -5,8 +5,8 @@
     <!-- <intro-content v-if="mode==='intro'" v-on:changeMode="setMode"/>
     <create-content v-if="mode==='write'" v-on:changeMode="setMode" v-on:addMemo="save"/>
     <list-content v-if="mode==='list'" v-bind:memoList="memoArr" v-on:changeMode="setMode"/> -->
-  <div class="row m-5">
-    <intro-content  v-on:changeMode="setMode"/>
+  <div class="row mt-3">
+    <!-- <intro-content  v-on:changeMode="setMode"/> -->
     <create-content  v-on:changeMode="setMode" v-on:addMemo="save"/>
     <list-content  v-bind:memoList="memoArr" v-on:changeMode="setMode"  v-on:showEdit="edit"/>
     <view-content v-bind:editMemo="memo" v-on:editEnd="editEndOk"></view-content>
@@ -17,7 +17,7 @@
 
 <script>
 // import AppHeader from './memo/AppHeader.vue';
-import IntroContent from './memo/IntroContent.vue';
+//import IntroContent from './memo/IntroContent.vue';
 import CreateContent from './memo/CreateContent.vue';
 import ListContent from './memo/ListContent.vue';
 import ViewContent from './memo/ViewContent.vue';
@@ -38,7 +38,7 @@ import ViewContent from './memo/ViewContent.vue';
     },
     components:{
       // 'app-header':AppHeader,
-      'intro-content':IntroContent,
+     // 'intro-content':IntroContent,
       'create-content':CreateContent,
       'list-content':ListContent,
       'view-content':ViewContent
