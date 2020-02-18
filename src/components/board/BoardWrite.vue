@@ -2,7 +2,7 @@
     <div class="container mt-5 mb-3">
         <div class="row">
             <div class="col-md-12 p-4" style="border:1px solid seagreen">    
-                <h1>POST</h1>            
+                <h1>Board POST</h1>            
                 <form id="bf" class="form" method="post" enctype="multipart/form-data" v-on:submit="handleSubmit">                    
                     <input type="text" name="subject" id="subject" v-model="board.subject"
                      class="form-control m-1" placeholder="Subject">
@@ -38,7 +38,7 @@
                     content:'',
                     filename:'',                    
                 },
-                preview:'a', //업로드 이미지 미리보기시 사용
+                preview:'', //업로드 이미지 미리보기시 사용
                 loading:false,
                 result:false,
                 boards:[]               
@@ -46,15 +46,15 @@
         },
         props:['member'],
         methods:{
+            //이미지 미리보기 처리 메소드-----------------
             handleFileup(){
                 this.board.filename=this.$refs.file.files[0];
                // alert(JSON.stringify(this.board.filename))
-               //이미지 미리보기-----------------
                 var file =this.board.filename; //e.target.files[0];
                // alert(file)
                 if (file && file.type.match(/^image\/(png|jpeg)$/)) {
                     this.preview = window.URL.createObjectURL(file)
-                    alert(this.preview)
+                    //alert(this.preview)
                 }
             },
             handleSubmit(e){
@@ -67,6 +67,8 @@
                 //--------------------------
 
                 this.board.name=this.member.nick;
+                //파일 업로드 데이터를 함께 보내야 할 때는 FormData를 사용
+                //문자열로 된 파라미터 데이터를 보내야 할 때는 URLSearchParam을 사용한다.
                 let fd = new FormData();
                 fd.append("name",this.board.name);
                 fd.append("subject", this.board.subject);

@@ -1,7 +1,8 @@
 cross domain문제 해결 방법
 https://github.com/winterguard/Study-Web/wiki/%ED%81%AC%EB%A1%9C%EC%8A%A4%EB%8F%84%EB%A9%94%EC%9D%B8-%EB%AC%B8%EC%A0%9C%ED%95%B4%EA%B2%B0-%EC%A0%84%EB%9E%B5---Cross-Domain
-1) Proxy이용 방법
-2) jsonp이용방법
+1) Proxy이용 방법 => 백엔드 서버쪽에서 Java 등의 언어를 이용해서 해당 파일에 접근하여
+                    데이터를 받아와 같은 웹서버상에서 서비스 하는 방법
+2) jsonp이용방법 => callback함수 지정
 3) 서버쪽 response 헤더 설정방법 => 이 방법을 사용해보자.
 백엔드 쪽에서 
 /*

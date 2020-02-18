@@ -6,6 +6,7 @@ import MemoApp from '../components/MemoApp.vue'
 import SignUp from '../components/user/SignUp.vue'
 import Login from '../components/user/Login.vue'
 import LogOut from '../components/user/LogOut.vue'
+import UserList from '../components/user/UserList.vue'
 
 import Board from '../components/board/Board.vue'
 import Card from '../components/board/Card.vue'
@@ -31,6 +32,11 @@ export default new VueRouter({
             path:'/signup',
             name:'SignUp',
             component:SignUp
+        },
+        {
+            path:'/users',
+            name:'UserList',
+            component:UserList
         },
         {
             path:'/login',

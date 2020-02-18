@@ -154,13 +154,15 @@ import axios from 'axios';
                 }
                 }//submit()-------
                 ,requestJoin(){
-                    let url="http://localhost:9090/VueBackend/join.jsp"
-                    let params=new URLSearchParams();    
                     
+                    let url="http://localhost:9090/VueBackend/join.jsp"
+                    
+                    let params=new URLSearchParams();    
                     params.append('name',this.user.name);
                     params.append('id',this.user.id);
                     params.append('pwd',this.user.pwd);
                     params.append('email',this.user.email);
+
                     var vm=this;
                     axios.post(url, params)
                         .then(function(response){

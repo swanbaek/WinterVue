@@ -26,10 +26,12 @@
                   <span class="badge badge-success">{{(board.wdate.year+1900)+"-"+(board.wdate.month+1)+"-"+board.wdate.date}}</span>
                   <span><a><i class="fa fa-1x fa-fw fa-heart"></i></a></span>
                   <span><a><i class="fa fa-1x fa-fw fa-hand-o-down"></i></a></span>
+                  <span><a><i class="fa fa-1x fa-fw fa-edit"></i></a></span>
+                  <span><a><i class="fa fa-1x fa-fw fa-trash-o"></i></a></span>
                 </div>
               </li>              
             </ul>
-        </div>
+        </div> 
         </div> <!-- row-->
     </div>
 </template>

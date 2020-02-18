@@ -20,7 +20,10 @@
       </li>
       <li class="nav-item">
         <router-link to="/signup" data-toggle="modal" class="nav-link">SignUp</router-link>
-      </li>    
+      </li> 
+       <li class="nav-item">
+        <router-link to="/users" class="nav-link">Users</router-link>
+      </li>   
       <li class="nav-item">
         <router-link to="/memo" class="nav-link">Memo</router-link>
       </li>
