@@ -1,5 +1,4 @@
 <template>
-    <div class="container mt-5 mb-3">
         <div class="row">
             <div class="col-md-12 p-4" style="border:1px solid seagreen">    
                 <h1>Board POST</h1>            
@@ -23,7 +22,6 @@
         </div>
         
 
-    </div>
 </template>
 
 <script>
@@ -59,14 +57,14 @@
             },
             handleSubmit(e){
                 e.preventDefault();
-                // if(!this.member.nick){
-                //     alert('로그인을 해야 이용 가능합니다.');
-                //     return;
-                // }
-                
+                let uname=sessionStorage.getItem('uname');
+                 if(!uname){
+                     alert('로그인을 해야 이용 가능합니다.');
+                     return;
+                }
                 //--------------------------
 
-                this.board.name=this.member.nick;
+                this.board.name=uname;
                 //파일 업로드 데이터를 함께 보내야 할 때는 FormData를 사용
                 //문자열로 된 파라미터 데이터를 보내야 할 때는 URLSearchParam을 사용한다.
                 let fd = new FormData();
@@ -75,15 +73,15 @@
                 fd.append("content", this.board.content);
                 fd.append("filename", this.board.filename);
                 const vobj=this;
-                axios.post( 'http://localhost:9090/VueBackend/boardEnd.do',
+                axios.post( 'http://localhost:9090/VueBackend/boardAdd.jsp',
                 fd,
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
                 }
-                ).then(function(){
-                    alert('success'+this);
+                ).then(function(res){
+                    alert('success=>'+res.data.result);
                     vobj.result=true;
                     vobj.board.subject='';
                     vobj.board.content='';
