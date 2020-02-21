@@ -11,6 +11,13 @@
             <span class="fa fa-spinner fa-spin"></span> Loading
             </div>
         </transition>
+        
+         <!-- <transition name="fade" v-show="loading">
+      <button class="btn btn-primary loading">
+        <span class="spinner-grow spinner-grow-sm"></span>
+          Loading..
+      </button>
+    </transition>  -->
         <!-- ------------------------------ -->
         </div>
         <div class="row" v-show="errMsg">        
@@ -49,6 +56,14 @@
             </ul>
         </div> 
         </div> <!-- row-->
+        <div class="row">
+          <div class="col-md-12 p-1 text-center">
+            <ul class="pagination text-center">
+              <li class="page-item" v-for="(page,i) in pageCount" :key="i"><a class="page-link" @click="getBoardData(page)">
+        {{page}}</a></li>
+            </ul>
+          </div>
+        </div>
     </div>
 </template>
 
@@ -60,10 +75,14 @@ import axios from 'axios'
             return{
                 bno:0,
                 boards:[],
+                totalCount:0,
+                cpage:1,
+                pageSize:5,
+                path:[],
                 loading:false,
                 errMsg:'',
-                isOne:true,
-                isTwo:true
+                lastScrollTop:0,
+                currentScrollTop:0
                 
             }
         },
@@ -73,7 +92,7 @@ import axios from 'axios'
         },
         watch:{
             '$route'(){
-                this.bno=this.$route.params.bno
+                this.cpage=this.$route.params.cpage
                // this.getBoardData();
             }
         },
@@ -86,10 +105,22 @@ import axios from 'axios'
             // }
             this.getBoardData();
         },
-        methods:{
-            getBoardData(){
+        computed:{
+          pageCount(){
+            let cnt= Math.floor((this.totalCount-1)/this.pageSize+1);
+            let arr=[];
+            for(let ps=1;ps<=cnt;ps++){
+              arr.push(ps);
+            }
+          return arr;
+          },         
+        },
+        methods:{        
+            getBoardData(page){
+              alert(page);
+              if(page==undefined) page=1;
                 this.loading=true;
-                const url="http://localhost:9090/VueBackend/boardList.jsp";
+                const url="http://localhost:9090/VueBackend/boardList.jsp?cpage="+page;
                 //const url="boardList.json";
                 axios.get(url)
                     .then((res)=>{
@@ -97,6 +128,8 @@ import axios from 'axios'
                         
                         
                         this.boards=res.data.boards;
+                        this.totalCount=res.data.board_count;
+                        //alert(this.totalCount);
                         this.loading=false;
                     })
                     .catch((err)=>{
@@ -106,7 +139,7 @@ import axios from 'axios'
             },
             loadMore () {
                 console.log('loadMore()...')
-                this.loading = true;
+                //this.loading = true;
                 setTimeout(() => {
                     for (var i = 0; i < 20; i++) {
                     this.boards.push('Item ' + this.nextItem++);
@@ -115,7 +148,18 @@ import axios from 'axios'
                 }, 200);
                 /**************************************/
             },
+            
             onScrollEvent(e){
+              //현재 스크롤 좌표
+                this.currentScrollTop=list.scrollTop;
+                if(this.currentScrollTop-this.lastScrollTop>0){
+                  //다운 스크롤일 경우
+                  this.lastScrollTop=this.currentScrollTop;
+                }else{
+                  //업 스크롤일 경우
+                  this.lastScrollTop=this.currentScrollTop;
+
+                }
                 //console.log(e.target.id)
                 let list=e.target;
                 if(list.scrollTop+list.clientHeight > (list.scrollHeight-100)){

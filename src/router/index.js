@@ -62,7 +62,7 @@ export default new VueRouter({
             ]
         },
         {
-            path:'/boardclassic',
+            path:'/boardclassic/:cpage',
             name:'BoardClassic',
             component:BoardClassic            
         },
